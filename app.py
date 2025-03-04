@@ -1,5 +1,7 @@
 import streamlit as st
+import plotly
 import plotly.express as px
+
 
 # App Title
 st.title("🤖 BMI Tracker and Health Advisor")

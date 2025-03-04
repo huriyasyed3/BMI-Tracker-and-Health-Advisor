@@ -1,7 +1,6 @@
 import streamlit as st
 import plotly.express as px
 
-
 # App Title
 st.title("🤖 BMI Tracker and Health Advisor")
 
@@ -9,11 +8,26 @@ st.title("🤖 BMI Tracker and Health Advisor")
 weight = st.number_input("Enter your weight (in kgs)")
 height = st.number_input("Enter your height (in meters)")
 
+# Function to give Health Advice
+def get_health_advice(bmi):
+    if bmi < 18.5:
+        return "🔹 You are **Underweight**. Try to eat a balanced diet and gain healthy weight."
+    elif 18.5 <= bmi < 24.9:
+        return "✅ You have a **Normal Weight**. Keep maintaining a healthy lifestyle!"
+    elif 25 <= bmi < 29.9:
+        return "⚠️ You are **Overweight**. Consider a healthy diet and exercise routine."
+    else:
+        return "🚨 You are **Obese**. Consult a doctor and focus on weight management."
+
 # Calculate BMI
 bmi = None
 if height > 0 and weight > 0:
     bmi = round(weight / (height ** 2), 2)
     st.success(f"Your BMI Index is {bmi}")
+    
+    # Show Health Advice
+    advice = get_health_advice(bmi)
+    st.warning(advice)  # Warning box for advice
 
 # BMI History store in session_state
 if 'bmi_history' not in st.session_state:
